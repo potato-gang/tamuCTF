@@ -66,7 +66,7 @@ Interesting things from the snapshot:
 - We have a full-blown Alpine linux setup
 - We know the chroot directory
 
-The objective was clear: Do a chroot escape.
+The objective is clear: Do a chroot escape.
 
 #### Chroot Escapes in Theory
 A process has two important properties when it comes to locating files in the filesystem.
@@ -85,7 +85,7 @@ And all that chroot() does is setting the `root` property of a process to the gi
 Note that only the root user is allowed to change this property and that doing a chroot()
 does not affect the `cwd`. You have to change `cwd` manually with chdir().
 
-Utilizing that knowledge we can build a chroot escape plan.
+Utilizing that knowledge we can create a chroot escape plan.
 
 #### Crafting a Chroot Escape
 The basic exploit plan is as follows:
