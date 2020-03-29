@@ -16,7 +16,7 @@ The FTP communication is basically transferring a gpg [public-key](./pub.asc)
 and [private-key](./priv.asc) which belong to `Ol' Rock <olrock@aggie.network>`.
 
 #### Stage 0 and stage 1
-The DNS requests were all very similar. They had 58 chars of base64 ending with `-tamu.1e100.net`.
+The DNS requests are all very similar. They consist of 58 base64 chars ending with `-tamu.1e100.net`.
 
 ![](./traffic.png)
 
@@ -28,17 +28,18 @@ Version: GnuPG
 ```
 
 So we can see that the base64 transmitted via the queries contains a GPG message.
-I wrote a little [script](./parse.py) that extracts all DNS requests from the pcap
-and saves the base64 part to disk. One line in this file equals one packet from the pcap file. If we try to decode this it first looks like we got an encrypted gpg message but after some scrolling you see this:
+Using a [script](./parse.py) we can extracts all DNS requests from the pcap
+and save the base64 part to disk (one line in this file equals one packet from the pcap file). After decoding this it looks like we got a valid gpg message except for the following part:
 ![](./garbage.png)
-So obviously something went wrong. Looking deeper into this you can notice that the first line of the encoded input that yields that garbage is a duplicate of the previous line.
+So obviously something went wrong. Looking deeper into this we can see that the first line of the base64 input that converts to non-printable characters is a duplicate of the previous line.
 If we remove all duplicate lines from the file we get a valid gpg message (stage 1).
 
 #### Stage 2
-We can decrypt this with the keys we extracted previously and we get a gzip file.
+We can decrypt this with the keys we extracted previously and we get a gzip file.   
+The password is the same password used in the FTP communication: `howdy`.
 
 #### Stage 3
-Unzipping that file yields a tar file.
+Unzipping the gzip file yields a tar file.
 
 #### Stage 4
 Extracting that tar archive yields 10 files ("...encoded", "....encoded", ".....encoded", ...).
@@ -61,7 +62,7 @@ $ file .*enc*
 #### Stage 5
 The jpeg looks like this:
 ![](./stage5.jpg)
-I spent some time analyzing this image and after a while I discovered this at the end of the file:
+And we can this at the end of the file:
 ```
 0001c5c0: 0000 0000 0000 0000 0000 6831 8160 0000  ..........h1.`..
 0001c5d0: 0000 0000 0000 0000 6831 8160 0000 0000  ........h1.`....
@@ -74,7 +75,7 @@ I spent some time analyzing this image and after a while I discovered this at th
 0001c640: 6b47 4377 8903 9bdb 0000 0000 4945 4e44  kGCw........IEND
 0001c650: ae42 6082                                .B`.
 ```
-At the end of the JPEG image you see the end of an PNG image ("IEND").
+At the end of the JPEG image we find an end of an PNG image ("IEND").   
 Also binwalk tells us that there are actually two images in this file (the zlib compressed data probably belongs to the PNG image):
 ```
 DECIMAL       HEXADECIMAL     DESCRIPTION
@@ -86,5 +87,5 @@ DECIMAL       HEXADECIMAL     DESCRIPTION
 
 #### Stage 6
 After extracting the PNG image from [stage5.jpg](./stage5.jpg) into [stage6.png](./stage6.png)
-you can finally see the flag:
+we can finally see the flag:
 ![](./stage6.png)
