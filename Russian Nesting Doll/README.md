@@ -62,7 +62,7 @@ $ file .*enc*
 #### Stage 5
 The jpeg looks like this:
 ![](./stage5.jpg)
-And we can this at the end of the file:
+And we can see this at the end of the file:
 ```
 0001c5c0: 0000 0000 0000 0000 0000 6831 8160 0000  ..........h1.`..
 0001c5d0: 0000 0000 0000 0000 6831 8160 0000 0000  ........h1.`....
