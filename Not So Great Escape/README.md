@@ -90,7 +90,7 @@ Utilizing that knowledge we can create a chroot escape plan.
 #### Crafting a Chroot Escape
 The basic exploit plan is as follows:
 
-| # | Command            | cwd of process (process view)          | root of process        |
+| # | Command            | cwd of process                         | root of process        |
 |---|--------------------|----------------------------------------|------------------------|
 | 0 | _Login_            | /                                      | /tmp/tmp.AFCIBh        |
 | 1 | mkdir("subdir")    | /                                      | /tmp/tmp.AFCIBh        |
