@@ -1,6 +1,6 @@
 # Russian Nesting Doll
 __Category__: Misc   
-__Points__: ~424   
+__Points__: 422   
 >Our monitoring systems noticed some funny-looking DNS traffic on one   
 >of our computers. We have the network logs from around the time of   
 >the incident. Want to take a look?

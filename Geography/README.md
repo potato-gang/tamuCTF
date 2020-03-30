@@ -1,6 +1,6 @@
 # Geography
 __Category__: Misc  
-__Points__: ~317
+__Points__: 304
 >My friend told me that she found something cool on the Internet,
 >but all she sent me was 11000010100011000111111111101110 and
 >11000001100101000011101111011111.

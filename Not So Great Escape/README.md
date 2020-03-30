@@ -1,6 +1,6 @@
 # Not So Great Escape
 __Category__: Misc  
-__Points__: ~444
+__Points__: 440
 >We've set up a chroot for you to develop your musl code in. It's bare, so install whatever you need.
 >
 >Feel free to log in with a raw TCP socket at challenges.tamuctf.com:4353.
